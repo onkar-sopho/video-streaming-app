@@ -19,7 +19,7 @@
 	<name>video-streaming-app</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>14</java.version>
 	</properties>
 
 </project>
