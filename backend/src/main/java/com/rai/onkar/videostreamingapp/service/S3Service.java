@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class S3Service implements FileService{
     @Override
     public String uploadFile(MultipartFile file) {
+        // Upload file to AWS S3
         return null;
     }
 }
