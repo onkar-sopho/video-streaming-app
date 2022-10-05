@@ -1,12 +1,10 @@
 package com.rai.onkar.videostreamingapp.controller.dto;
 
-import com.rai.onkar.videostreamingapp.model.Comment;
 import com.rai.onkar.videostreamingapp.model.VideoStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.Set;
 
 @Data
