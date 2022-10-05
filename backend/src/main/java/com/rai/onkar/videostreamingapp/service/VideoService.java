@@ -26,11 +26,20 @@ public class VideoService {
         videoRepository.save(video);
     }
 
-    public void editVideo(VideoDto videoDto) {
+    public VideoDto editVideo(VideoDto videoDto) {
         // find the video by video id
+        Video savedVideo = videoRepository.findById(videoDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Could not find video by id: " + videoDto.getId()));
 
         // map the videoDto fields to video
+        savedVideo.setTitle(videoDto.getTitle());
+        savedVideo.setDescription(videoDto.getDescription());
+        savedVideo.setVideoStatus(videoDto.getVideoStatus());
+        savedVideo.setThumbnailUrl(videoDto.getThumbnailUrl());
+        savedVideo.setTags(videoDto.getTags());
 
         // save the video to the database
+        videoRepository.save(savedVideo);
+        return videoDto;
     }
 }
