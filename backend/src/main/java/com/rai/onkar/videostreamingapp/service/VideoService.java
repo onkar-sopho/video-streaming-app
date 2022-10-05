@@ -1,5 +1,6 @@
 package com.rai.onkar.videostreamingapp.service;
 
+import com.rai.onkar.videostreamingapp.controller.dto.VideoDto;
 import com.rai.onkar.videostreamingapp.model.Video;
 import com.rai.onkar.videostreamingapp.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,13 @@ public class VideoService {
 
         // Save video metadata to database
         videoRepository.save(video);
+    }
+
+    public void editVideo(VideoDto videoDto) {
+        // find the video by video id
+
+        // map the videoDto fields to video
+
+        // save the video to the database
     }
 }
