@@ -1,5 +1,6 @@
 package com.rai.onkar.videostreamingapp.service;
 
+import com.rai.onkar.videostreamingapp.dto.UploadVideoResponse;
 import com.rai.onkar.videostreamingapp.dto.VideoDto;
 import com.rai.onkar.videostreamingapp.model.Video;
 import com.rai.onkar.videostreamingapp.repository.VideoRepository;
@@ -14,7 +15,7 @@ public class VideoService {
     private final S3Service s3Service;
     private final VideoRepository videoRepository;
 
-    public void uploadVideo(MultipartFile file) {
+    public UploadVideoResponse uploadVideo(MultipartFile file) {
 
         // Upload video to AWS S3 and fetch the video url
         String videoUrl = s3Service.uploadFile(file);
@@ -23,7 +24,9 @@ public class VideoService {
         video.setVideoUrl(videoUrl);
 
         // Save video metadata to database
-        videoRepository.save(video);
+        Video savedVideo = videoRepository.save(video);
+
+        return new UploadVideoResponse(savedVideo.getId(), savedVideo.getVideoUrl());
     }
 
     public VideoDto editVideo(VideoDto videoDto) {

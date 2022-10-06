@@ -1,5 +1,6 @@
 package com.rai.onkar.videostreamingapp.controller;
 
+import com.rai.onkar.videostreamingapp.dto.UploadVideoResponse;
 import com.rai.onkar.videostreamingapp.dto.VideoDto;
 import com.rai.onkar.videostreamingapp.service.VideoService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class VideoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void uploadVideo(@RequestParam("file") MultipartFile file) {
-        videoService.uploadVideo(file);
+    public UploadVideoResponse uploadVideo(@RequestParam("file") MultipartFile file) {
+        return videoService.uploadVideo(file);
     }
 
     @PostMapping("/thumbnail")
