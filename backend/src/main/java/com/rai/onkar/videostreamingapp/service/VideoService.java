@@ -1,6 +1,6 @@
 package com.rai.onkar.videostreamingapp.service;
 
-import com.rai.onkar.videostreamingapp.controller.dto.VideoDto;
+import com.rai.onkar.videostreamingapp.dto.VideoDto;
 import com.rai.onkar.videostreamingapp.model.Video;
 import com.rai.onkar.videostreamingapp.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,7 @@ public class VideoService {
 
     public VideoDto editVideo(VideoDto videoDto) {
         // find the video by video id
-        Video savedVideo = videoRepository.findById(videoDto.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Could not find video by id: " + videoDto.getId()));
+        Video savedVideo = getVideoById(videoDto.getId());
 
         // map the videoDto fields to video
         savedVideo.setTitle(videoDto.getTitle());
@@ -41,5 +40,18 @@ public class VideoService {
         // save the video to the database
         videoRepository.save(savedVideo);
         return videoDto;
+    }
+
+    public String uploadThumbnail(MultipartFile file, String videoId) {
+        Video savedVideo = getVideoById(videoId);
+        String thumbnailUrl = s3Service.uploadFile(file);
+        savedVideo.setThumbnailUrl(thumbnailUrl);
+        videoRepository.save(savedVideo);
+        return thumbnailUrl;
+    }
+
+    Video getVideoById(String videoId) {
+        return videoRepository.findById(videoId)
+                .orElseThrow(() -> new IllegalArgumentException("Could not find video by id: " + videoId));
     }
 }

@@ -1,4 +1,4 @@
-package com.rai.onkar.videostreamingapp.controller.dto;
+package com.rai.onkar.videostreamingapp.dto;
 
 import com.rai.onkar.videostreamingapp.model.VideoStatus;
 import lombok.AllArgsConstructor;
